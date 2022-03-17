@@ -5,5 +5,7 @@
 dist
 dist-ssr
 node_modules
-.idea/
 *.log
+
+.idea/*
+!.idea/watcherTasks.xml
