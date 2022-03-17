@@ -1,0 +1,20 @@
+:root {
+  --color-brand: var(--blue-5);
+}
+
+:root,
+.theme-dark {
+  --bg: var(--gray-9);
+  --color: var(--gray-1);
+}
+
+.theme-light {
+  --bg: var(--gray-1);
+  --color: var(--gray-9);
+}
+
+:root,
+[class*="theme-"] {
+  background: var(--bg);
+  color: var(--color);
+}

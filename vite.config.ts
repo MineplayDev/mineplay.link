@@ -1,3 +1,4 @@
+import autoprefixer from "autoprefixer";
 import path from "path";
 import { defineConfig } from "vite";
 import Vue from "@vitejs/plugin-vue";
@@ -7,6 +8,16 @@ import AutoImport from "unplugin-auto-import/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer(),
+        require("postcss-preset-env")({
+          stage: 1,
+        }),
+      ],
+    },
+  },
   resolve: {
     alias: {
       "~/": `${path.resolve(__dirname, "src")}/`,
