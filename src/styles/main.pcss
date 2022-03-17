@@ -1,21 +1,12 @@
-html,
-body,
-#app {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-html.dark {
-  background: #121212;
-}
+@import "open-props/postcss/style";
+@import "themes.pcss";
 
 #nprogress {
   pointer-events: none;
 }
 
 #nprogress .bar {
-  background: rgb(13, 148, 136);
+  background: var(--color-brand);
   opacity: 0.75;
   position: fixed;
   z-index: 1031;

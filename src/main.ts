@@ -2,7 +2,7 @@ import { ViteSSG } from "vite-ssg";
 import generatedRoutes from "virtual:generated-pages";
 import App from "./App.vue";
 
-import "./styles/main.css";
+import "./styles/main.pcss";
 
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
