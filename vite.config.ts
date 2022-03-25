@@ -6,6 +6,7 @@ import Pages from "vite-plugin-pages";
 import generateSitemap from "vite-ssg-sitemap";
 import AutoImport from "unplugin-auto-import/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import istanbul from "vite-plugin-istanbul";
 
 export default defineConfig({
   css: {
@@ -25,21 +26,22 @@ export default defineConfig({
   },
   plugins: [
     Vue({
-      include: [/\.vue$/, /\.md$/],
+      include: /\.vue$/,
+    }),
+    istanbul({
+      requireEnv: true,
+      include: "src/*",
     }),
 
-    // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ["vue"],
     }),
 
-    // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: ["vue", "vue-router", "@vueuse/head", "@vueuse/core"],
       dts: "src/auto-imports.d.ts",
     }),
 
-    // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "safari-pinned-tab.svg"],
@@ -69,13 +71,14 @@ export default defineConfig({
     }),
   ],
 
-  // https://github.com/antfu/vite-ssg
   ssgOptions: {
     dirStyle: "nested",
     script: "async",
     formatting: "minify",
     onFinished() {
-      generateSitemap();
+      generateSitemap({
+        hostname: "https://new.mineplay.link",
+      });
     },
   },
 
@@ -83,8 +86,17 @@ export default defineConfig({
     include: ["vue", "vue-router", "@vueuse/core", "@vueuse/head"],
   },
 
-  // https://github.com/vitest-dev/vitest
+  build: {
+    sourcemap: true,
+  },
+
   test: {
+    coverage: {
+      all: true,
+      include: ["src"],
+      reporter: ["text", "json"],
+      clean: true,
+    },
     include: ["test/**/*.test.ts"],
     environment: "jsdom",
     deps: {
