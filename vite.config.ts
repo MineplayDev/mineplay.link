@@ -54,6 +54,7 @@ export default defineConfig({
   ssgOptions: {
     dirStyle: "nested",
     script: "async",
+    format: "cjs",
     formatting: "minify",
     onFinished() {
       generateSitemap({
